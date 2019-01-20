@@ -32,30 +32,43 @@ export default function App() {
 		searchInputRef.current.focus();
 	};
 	return (
-		<div>
-			<h1>Search results are </h1>
-			<form onSubmit={handleSubmit}>
+		<div className="container mx-auto max-width-md bg-grey-lighter shadow-md px-4 mt-2">
+			<form onSubmit={handleSubmit} className="mb-2 pt-4">
 				<input
 					type="text"
 					value={query}
 					onChange={e => setQuery(e.target.value)}
 					ref={searchInputRef}
+					className="border border-dark px-4 py-2 mb-2 rounded mr-2 ml-2"
 				/>
-				<button type="submit">search</button>
-				<button type="button" onClick={clearSearch}>
+				<button
+					type="submit"
+					className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded mr-2"
+				>
+					search
+				</button>
+				<button
+					type="button"
+					onClick={clearSearch}
+					className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded mr-2"
+				>
 					clear
 				</button>
 			</form>
 			{!error && loading ? (
 				<h1>Loading ...</h1>
 			) : (
-				<div>
-					<ul>
-						{news.map(item => (
-							<li key={item.objectID}>{item.title}</li>
-						))}
-					</ul>
-				</div>
+				<ul className="list-reset px-4 ">
+					<h3 className="font-thin pb-2 ">Search results are </h3>
+					{news.map(item => (
+						<li
+							key={item.objectID}
+							className="hover:text-blue-dark cursor-pointer py-1 font-thin text-grey-darker"
+						>
+							{item.title}
+						</li>
+					))}
+				</ul>
 			)}
 			{error && <h1>Something went wrong</h1>}
 		</div>
